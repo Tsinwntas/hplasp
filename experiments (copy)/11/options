@@ -1,0 +1,15 @@
+domain: ../experiments/11/domain.pddl
+problem: ../experiments/11/problem.pddl
+program: incrementalSteps.py
+steps: 1
+incrementationRatio: 0
+parallel: 4
+maxSteps: 15
+maxSolutions: 0
+solveLimit: 0
+timeLimit: 420
+parser: dashes
+heuristic: relaxed
+toughness: 1.01
+debug: false
+python: python3

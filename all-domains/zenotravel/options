@@ -9,7 +9,7 @@ maxSolutions: 0
 solveLimit: 0
 timeLimit: 600
 parser: normal
-heuristic: costs
+heuristic: cost
 toughness: 1.01
 debug: false
 python: python3

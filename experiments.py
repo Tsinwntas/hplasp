@@ -72,9 +72,12 @@ def runHplasp(dir,domain,problem):
 def runClingo(dir,domain,problem):
 	global t;
 	start_time = time.time()
-	p = subprocess.Popen(["./plasp translate all-domains/"+dir+"/"+domain+ " all-domains/"+dir+"/"+problem+" > translate.lp"], preexec_fn=os.setsid, shell=True)
-	p.wait();
-	p = subprocess.Popen(["clingo translate.lp strips-incremental.lp -t "+op.getOption("parallel") + " --time-limit="+str(t)+" 1> experiments/clingo-log-"+domain+"-"+problem+" 2>&1"], preexec_fn=os.setsid, shell=True)
+	# p = subprocess.Popen(["./plasp translate all-domains/"+dir+"/"+domain+ " all-domains/"+dir+"/"+problem+" > translate.lp"], preexec_fn=os.setsid, shell=True)
+	# p.wait();
+	# p = subprocess.Popen(["clingo translate.lp strips-incremental.lp -t "+op.getOption("parallel") + " --time-limit="+str(t)+" 1> experiments/clingo-log-"+domain+"-"+problem+" 2>&1"], preexec_fn=os.setsid, shell=True)
+# './plasp translate '+sys.argv[1]+' '+sys.argv[2]+' | clingo - encodings/incmode.lp encodings/preprocess.lp encodings/strips-incremental.lp'
+	p = subprocess.Popen(["./plasp translate all-domains/"+dir+"/"+domain+ " all-domains/"+dir+"/"+problem+" | clingo - encodings/incmode.lp encodings/preprocess.lp encodings/strips-incremental.lp -t "+op.getOption("parallel") + " --time-limit="+str(t)+" 1> experiments/clingo-log-"+domain+"-"+problem+" 2>&1"], preexec_fn=os.setsid, shell=True)
+
 	try:
 		p.wait(t)
 		print("Done.")

@@ -1,42 +1,34 @@
-(define (domain Depot)
-(:requirements :typing)
-(:types place locatable - object
-	depot distributor - place
-        truck hoist surface - locatable
-        pallet crate - surface)
+(define (domain gripper-strips)
+   (:predicates (room ?r)
+		(ball ?b)
+		(gripper ?g)
+		(at-robby ?r)
+		(at ?b ?r)
+		(free ?g)
+		(carry ?o ?g))
 
-(:predicates (at ?x - locatable ?y - place) 
-             (on ?x - crate ?y - surface)
-             (in ?x - crate ?y - truck)
-             (lifting ?x - hoist ?y - crate)
-             (available ?x - hoist)
-             (clear ?x - surface))
-	
-(:action Drive
-:parameters (?x - truck ?y - place ?z - place) 
-:precondition (and (at ?x ?y))
-:effect (and (not (at ?x ?y)) (at ?x ?z)))
+   (:action move
+       :parameters  (?from ?to)
+       :precondition (and  (room ?from) (room ?to) (at-robby ?from))
+       :effect (and  (at-robby ?to)
+		     (not (at-robby ?from))))
 
-(:action Lift
-:parameters (?x - hoist ?y - crate ?z - surface ?p - place)
-:precondition (and (at ?x ?p) (available ?x) (at ?y ?p) (on ?y ?z) (clear ?y))
-:effect (and (not (at ?y ?p)) (lifting ?x ?y) (not (clear ?y)) (not (available ?x)) 
-             (clear ?z) (not (on ?y ?z))))
 
-(:action Drop 
-:parameters (?x - hoist ?y - crate ?z - surface ?p - place)
-:precondition (and (at ?x ?p) (at ?z ?p) (clear ?z) (lifting ?x ?y))
-:effect (and (available ?x) (not (lifting ?x ?y)) (at ?y ?p) (not (clear ?z)) (clear ?y)
-		(on ?y ?z)))
 
-(:action Load
-:parameters (?x - hoist ?y - crate ?z - truck ?p - place)
-:precondition (and (at ?x ?p) (at ?z ?p) (lifting ?x ?y))
-:effect (and (not (lifting ?x ?y)) (in ?y ?z) (available ?x)))
+   (:action pick
+       :parameters (?obj ?room ?gripper)
+       :precondition  (and  (ball ?obj) (room ?room) (gripper ?gripper)
+			    (at ?obj ?room) (at-robby ?room) (free ?gripper))
+       :effect (and (carry ?obj ?gripper)
+		    (not (at ?obj ?room)) 
+		    (not (free ?gripper))))
 
-(:action Unload 
-:parameters (?x - hoist ?y - crate ?z - truck ?p - place)
-:precondition (and (at ?x ?p) (at ?z ?p) (available ?x) (in ?y ?z))
-:effect (and (not (in ?y ?z)) (not (available ?x)) (lifting ?x ?y)))
 
-)
+   (:action drop
+       :parameters  (?obj  ?room ?gripper)
+       :precondition  (and  (ball ?obj) (room ?room) (gripper ?gripper)
+			    (carry ?obj ?gripper) (at-robby ?room))
+       :effect (and (at ?obj ?room)
+		    (free ?gripper)
+		    (not (carry ?obj ?gripper)))))
+

@@ -38,7 +38,7 @@ def runNoStrict():
 	try:
 		p=subprocess.Popen(['./plasp translate '+domain+ ' '+problem+' > translate.lp'], shell=True)
 		p.wait();
-		p=subprocess.Popen(['clingo translate.lp incmode-py-mine4.lp -c _iteration=0 -c _parallel=1 -c c1=0 -t '+op.getOption("parallel")+getSolveLimit()+getTimeLimit()+' 1> log 2>&1'], shell=True)
+		p=subprocess.Popen(['clingo translate.lp incmode-py-mine4.lp -c _iteration=0 -c _parallel=1 -c c1=0 -c k='+op.getOptionOrDefault("k:","0")+' -t '+op.getOption("parallel")+getSolveLimit()+getTimeLimit()+' 1> log 2>&1'], shell=True)
 		p.wait();
 		utils.updateProblem()
 		utils.setInitialRelaxed()
@@ -65,7 +65,7 @@ def runStrictBySteps(iteration,steps):
 	previousRelaxedSteps = utils.getRelaxedSteps()
 	p=subprocess.Popen(['./plasp translate '+domain+ ' updated_problem.pddl > translate.lp'], shell=True)
 	p.wait();
-	p=subprocess.Popen(['clingo translate.lp incmode-py-mine4.lp -c _iteration='+str(iteration)+' -c _parallel=1 -c c1='+str(steps)+getMaxSolutions()+' -t '+op.getOption("parallel")+getSolveLimit()+getTimeLimit()+' 1> log 2>&1'], shell=True)
+	p=subprocess.Popen(['clingo translate.lp incmode-py-mine4.lp -c k='+op.getOptionOrDefault("k:","0")+' -c _iteration='+str(iteration)+' -c _parallel=1 -c c1='+str(steps)+getMaxSolutions()+' -t '+op.getOption("parallel")+getSolveLimit()+getTimeLimit()+' 1> log 2>&1'], shell=True)
 	p.wait();
 	currentRelaxedSteps = utils.getRelaxedSteps();
 	if currentRelaxedSteps > previousRelaxedSteps:
@@ -81,7 +81,7 @@ def runStrictByCost(iteration,steps):
 	p=subprocess.Popen(['./plasp translate '+domain+ ' updated_problem.pddl > translate.lp'], shell=True)
 	p.wait();
 	#' --opt-mode=opt,' + str(previousCost) +
-	p=subprocess.Popen(['clingo translate.lp incmode-py-mine4.lp  --opt-mode=opt,'+str(int(utils.getToughenedCost(previousCost)))+' -c _iteration='+str(iteration)+' -c _parallel=1 -c c1='+str(steps)+getMaxSolutions()+' -t '+op.getOption("parallel")+getSolveLimit()+getTimeLimit()+' 1> log 2>&1'], shell=True)
+	p=subprocess.Popen(['clingo translate.lp incmode-py-mine4.lp  --opt-mode=opt,'+str(int(utils.getToughenedCost(previousCost)))+' -c k='+op.getOptionOrDefault("k:","0")+' -c _iteration='+str(iteration)+' -c _parallel=1 -c c1='+str(steps)+getMaxSolutions()+' -t '+op.getOption("parallel")+getSolveLimit()+getTimeLimit()+' 1> log 2>&1'], shell=True)
 	p.wait();
 	if utils.getDone():
 		utils.updateMoves();

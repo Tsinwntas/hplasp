@@ -3,7 +3,7 @@ problem: problem.pddl
 program: incrementalSteps.py
 steps: 10
 incrementationRatio: 10
-parallel: 4
+parallel: 8
 maxSteps: 150
 maxSolutions: 0
 solveLimit: 0

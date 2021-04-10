@@ -126,6 +126,7 @@ alright(A,t) :- active(A), 1 < _parallel, _parallel < 4, not occurs(A,t).
 alright(A,t) :- perform(A,t).
 
 :- 1 < _parallel, _parallel < 4, active(A), not alright(A,t), t<c1+1.
+:- k > 0, #count {A : occurs(A, t)} > k, t > c1.
 
 #edge((A1,t),(A2,t)) : disable(A1,A2), occurs(A1,t), _parallel = 4, not disable.
 #edge((A1,t),(A2,t)) : disable(A1,A2), occurs(A2,t), disable.

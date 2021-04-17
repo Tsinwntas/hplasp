@@ -9,38 +9,64 @@ preprocess.lp:14:4-33: info: atom does not occur in any rule head:
 preprocess.lp:15:4-41: info: atom does not occur in any rule head:
   requires(feature(conditionalEffects))
 
-strips-incremental-c1-start.lp:66:15-28: info: atom does not occur in any rule head:
-  mutexGroup(G)
+preprocess.lp:19:25-47: info: atom does not occur in any rule head:
+  postcondition(A,E,X,V)
 
-strips-incremental-c1-start.lp:66:30-45: info: atom does not occur in any rule head:
-  contains(G,X,V)
+preprocess.lp:21:25-34: info: atom does not occur in any rule head:
+  action(A)
 
-strips-incremental-c1-start.lp:67:15-28: info: atom does not occur in any rule head:
-  mutexGroup(G)
+preprocess.lp:21:36-55: info: atom does not occur in any rule head:
+  precondition(A,X,V)
 
-strips-incremental-c1-start.lp:74:41-56: info: atom does not occur in any rule head:
-  contains(G,X,V)
+preprocess.lp:22:25-34: info: atom does not occur in any rule head:
+  action(A)
 
-strips-incremental-c1-start.lp:152:14-25: info: atom does not occur in any rule head:
-  occurs(X,#Inc0)
+preprocess.lp:25:31-50: info: atom does not occur in any rule head:
+  precondition(A,X,V)
 
-strips-incremental-c1-start.lp:157:14-25: info: atom does not occur in any rule head:
-  occurs(A,#Inc0)
+preprocess.lp:27:20-29: info: atom does not occur in any rule head:
+  action(A)
 
-Solving...
-strips-incremental-c1-start.lp:84:41-56: info: atom does not occur in any rule head:
-  contains(G,X,V)
+preprocess.lp:28:61-80: info: atom does not occur in any rule head:
+  precondition(A,X,V)
 
-Solving...
-Solving...
-Solving...
+preprocess.lp:32:18-35: info: atom does not occur in any rule head:
+  initialState(X,V)
+
+preprocess.lp:35:48-67: info: atom does not occur in any rule head:
+  precondition(A,X,V)
+
+preprocess.lp:38:4-13: info: atom does not occur in any rule head:
+  goal(X,V)
+
+preprocess.lp:42:17-26: info: atom does not occur in any rule head:
+  goal(X,V)
+
+preprocess.lp:42:32-49: info: atom does not occur in any rule head:
+  initialState(X,V)
+
+preprocess.lp:43:28-47: info: atom does not occur in any rule head:
+  precondition(A,X,V)
+
+preprocess.lp:43:53-70: info: atom does not occur in any rule head:
+  initialState(X,V)
+
+preprocess.lp:46:17-26: info: atom does not occur in any rule head:
+  goal(X,V)
+
+preprocess.lp:46:28-45: info: atom does not occur in any rule head:
+  initialState(X,V)
+
+preprocess.lp:47:28-47: info: atom does not occur in any rule head:
+  precondition(A,X,V)
+
 Solving...
 Answer: 1
-goal(variable(("on",constant("crate0"),constant("crate4"))),value(variable(("on",constant("crate0"),constant("crate4"))),true)) goal(variable(("on",constant("crate2"),constant("crate6"))),value(variable(("on",constant("crate2"),constant("crate6"))),true)) goal(variable(("on",constant("crate4"),constant("crate7"))),value(variable(("on",constant("crate4"),constant("crate7"))),true)) goal(variable(("on",constant("crate5"),constant("pallet2"))),value(variable(("on",constant("crate5"),constant("pallet2"))),true)) goal(variable(("on",constant("crate6"),constant("pallet1"))),value(variable(("on",constant("crate6"),constant("pallet1"))),true)) goal(variable(("on",constant("crate7"),constant("pallet0"))),value(variable(("on",constant("crate7"),constant("pallet0"))),true)) move(action(("lift",constant("hoist2"),constant("crate3"),constant("pallet2"),constant("distributor1"))),1) move(action(("unload",constant("hoist0"),constant("crate4"),constant("truck1"),constant("depot0"))),1) move(action(("drop",constant("hoist0"),constant("crate4"),constant("crate7"),constant("depot0"))),2) move(action(("lift",constant("hoist1"),constant("crate2"),constant("crate6"),constant("distributor0"))),2) move(action(("load",constant("hoist2"),constant("crate3"),constant("truck0"),constant("distributor1"))),2) move(action(("unload",constant("hoist2"),constant("crate5"),constant("truck0"),constant("distributor1"))),3) move(action(("unload",constant("hoist0"),constant("crate0"),constant("truck1"),constant("depot0"))),3) move(action(("drop",constant("hoist2"),constant("crate5"),constant("pallet2"),constant("distributor1"))),4) move(action(("drop",constant("hoist0"),constant("crate0"),constant("crate4"),constant("depot0"))),4) move(action(("drive",constant("truck0"),constant("distributor1"),constant("depot0"))),4) move(action(("drop",constant("hoist1"),constant("crate2"),constant("crate6"),constant("distributor0"))),4)
+
 SATISFIABLE
 
 Models       : 1+
-Calls        : 5
-Time         : 1.185s (Solving: 0.17s 1st Model: 0.00s Unsat: 0.00s)
-CPU Time     : 1.194s
-Threads      : 4        (Winner: 1)
+Calls        : 1
+Time         : 0.135s (Solving: 0.04s 1st Model: 0.00s Unsat: 0.00s)
+CPU Time     : 0.069s
+Threads      : 4        (Winner: 3)

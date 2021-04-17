@@ -48,6 +48,10 @@ disable(A1,A2) :- active(A1), active(A2), A1 != A2, postcondition(A1,X,V),
                   not diverge(A1,A2), not exclude(A1,A2),
                   1 < _parallel, _parallel < 5.
 
+%:- #count{A,X:selfdefeat(A,X)} < 3.
+%:- #count{A1,A2:diverge(A1,A2)} < 3.
+%:- #count{A1,A2:exclude(A1,A2)} < 3.
+
 disable :- _parallel = 4, #sum{1,A1 : disable(A1,A2); -1,A2 : disable(A1,A2)} > 0.
 
 scope(X,V) :- active(A), precondition(A,X,V), _parallel = 2.
@@ -109,11 +113,11 @@ effect(X,t) :- occurs(A,t), postcondition(A,X,V), fluent(X), not precondition(A,
 :- _parallel != 2, occurs(A,t), precondition(A,X,V), not holds(X,V,t-1).
 
 :- _parallel = 1, occurs(A,t), precondition(A,X,V), not has_condition(A,X,1), not holds(X,V,t).
-
+%:- #count{A,X: occurs(A,t), postcondition(A,X,V), fluent(X) } > 4.
 single(X,t) :- occurs(A,t), selfdefeat(A,X).
 
 :- single(X,t), #count{A : occurs(A,t), postcondition(A,X,V), not precondition(A,X,V)} > 1,t<c1+1.
-
+:- k>0, single(X,t), #count{A : occurs(A,t), postcondition(A,X,V), not precondition(A,X,V)} > k, t>c1.
 proceed(X,V,t) :- holds(X,V,t-1), scope(X,V).
 proceed(X,V,t) :- perform(A,t), scope(X,V), postcondition(A,X,V), not precondition(A,X,V),
                   occurs(A,t).

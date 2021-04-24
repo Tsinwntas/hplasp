@@ -40,7 +40,6 @@ def runNoStrict():
 		p.wait();
 		p=subprocess.Popen(['clingo translate.lp incmode-py-mine4.lp -c _iteration=0 -c _parallel=1 -c c1=0 -c k='+op.getOptionOrDefault("k:","0")+' -t '+op.getOption("parallel")+getSolveLimit()+getTimeLimit()+' 1> log 2>&1'], shell=True)
 		p.wait();
-		read()
 		utils.updateProblem()
 		utils.setInitialRelaxed()
 	except Exception as err:

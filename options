@@ -1,13 +1,13 @@
-domain: domain.pddl
-problem: problem.pddl
+domain: ../all-domains/trucks/domain_p13.pddl
+problem: ../all-domains/trucks/p13.pddl
 program: incrementalSteps.py
 steps: 8
 incrementationRatio: 2
 parallel: 8
-maxSteps: 150
+maxSteps: 40
 maxSolutions: 0
 solveLimit: 0
-timeLimit: 600
+timeLimit: 0
 parser: dashes
 heuristic: cost
 toughness: 1.01

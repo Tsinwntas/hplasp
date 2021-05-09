@@ -5,9 +5,35 @@ import re
 import op
 from os import path
 
+fails = 0;
+iteration = 0;
+inits = []
+problems = []
+costs = [];
+relaxed = [];
+moves = [];
+
 split = []
 extra= "";
 isRelaxedNecessary = op.getOption("program") == "incrementalSteps.py"
+
+def setIteration(i):
+	global iteration;
+	iteration = i;
+	fillLists(i);
+
+def getIteration():
+	global iteration;
+	fillLists(iteration);
+	return iteration;
+
+def fillLists(i):
+	while len(inits) <= i:
+		inits.append('')
+		problems.append('')
+		costs.append(0)
+		relaxed.append('')
+		moves.append('')
 
 def isDebug():
 	return op.getOption("debug") == "true"
@@ -45,6 +71,9 @@ def getDone():
 
 def needsToBeUpdated(relaxed, cost):
 	global isRelaxedNecessary
+
+	if cost == 0:
+		return True;
 
 	if not isRelaxedNecessary:
 		return True;
@@ -88,6 +117,7 @@ def getCost():
 	return cost
 
 def setCost(cost):
+	costs[getIteration()] = cost;
 	fw.write("data/cost", str(cost))
 
 #Splits problem into pre and post init so that it can rebuild it later
@@ -107,13 +137,17 @@ def split(problem):
 def updateProblem():
 	global split
 	i = open("data/init","r")
-	fw.write("updated_problem.pddl", split[0]+"\n"+i.read()+"\n"+split[1])
+	updated_problem = split[0]+"\n"+i.read()+"\n"+split[1]
+	fw.write("updated_problem.pddl", updated_problem)
+	problems[getIteration()] = updated_problem;
 	i.close();
 	updateMoves();
 
 def updateMoves():
 	i = open("data/moves-single","r")
-	fw.append("data/moves", i.read())
+	currentMoves = i.read();
+	fw.append("data/moves", currentMoves)
+	moves[getIteration()] = moves[getIteration()-1]+currentMoves;
 	i.close()
 
 def isCheckByRelaxedSteps():
@@ -130,3 +164,28 @@ def getInitialRelaxed():
 
 def setInitialRelaxed():
 	fw.write("data/initialRelaxed", str(getRelaxedSteps()));
+
+def updateProblemToIteration(i):
+	iteration = i;
+	print("UPDATE")
+	fw.write("updated_problem.pddl", problems[i])
+	fw.append("data/moves", moves[i])
+	setCost(costs[i])
+
+def failed():
+	global fails;
+	fails+=1;
+	reset = op.getOptionOrDefault("reset",0);
+	if reset == 0:
+		return False; 
+	if fails == int(reset):
+		fw.write("data/moves", '')
+		setIteration(0);
+		updateProblemToIteration(0);
+		return True;
+	return False;
+
+def setFails(f):
+	global fails;
+	fails = f;
+

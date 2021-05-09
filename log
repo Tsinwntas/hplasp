@@ -9,64 +9,35 @@ preprocess.lp:14:4-33: info: atom does not occur in any rule head:
 preprocess.lp:15:4-41: info: atom does not occur in any rule head:
   requires(feature(conditionalEffects))
 
-preprocess.lp:19:25-47: info: atom does not occur in any rule head:
-  postcondition(A,E,X,V)
+strips-incremental-c1-start.lp:70:15-28: info: atom does not occur in any rule head:
+  mutexGroup(G)
 
-preprocess.lp:21:25-34: info: atom does not occur in any rule head:
-  action(A)
+strips-incremental-c1-start.lp:70:30-45: info: atom does not occur in any rule head:
+  contains(G,X,V)
 
-preprocess.lp:21:36-55: info: atom does not occur in any rule head:
-  precondition(A,X,V)
+strips-incremental-c1-start.lp:71:15-28: info: atom does not occur in any rule head:
+  mutexGroup(G)
 
-preprocess.lp:22:25-34: info: atom does not occur in any rule head:
-  action(A)
+strips-incremental-c1-start.lp:78:41-56: info: atom does not occur in any rule head:
+  contains(G,X,V)
 
-preprocess.lp:25:31-50: info: atom does not occur in any rule head:
-  precondition(A,X,V)
+strips-incremental-c1-start.lp:156:14-25: info: atom does not occur in any rule head:
+  occurs(X,#Inc0)
 
-preprocess.lp:27:20-29: info: atom does not occur in any rule head:
-  action(A)
+strips-incremental-c1-start.lp:161:14-25: info: atom does not occur in any rule head:
+  occurs(A,#Inc0)
 
-preprocess.lp:28:61-80: info: atom does not occur in any rule head:
-  precondition(A,X,V)
-
-preprocess.lp:32:18-35: info: atom does not occur in any rule head:
-  initialState(X,V)
-
-preprocess.lp:35:48-67: info: atom does not occur in any rule head:
-  precondition(A,X,V)
-
-preprocess.lp:38:4-13: info: atom does not occur in any rule head:
-  goal(X,V)
-
-preprocess.lp:42:17-26: info: atom does not occur in any rule head:
-  goal(X,V)
-
-preprocess.lp:42:32-49: info: atom does not occur in any rule head:
-  initialState(X,V)
-
-preprocess.lp:43:28-47: info: atom does not occur in any rule head:
-  precondition(A,X,V)
-
-preprocess.lp:43:53-70: info: atom does not occur in any rule head:
-  initialState(X,V)
-
-preprocess.lp:46:17-26: info: atom does not occur in any rule head:
-  goal(X,V)
-
-preprocess.lp:46:28-45: info: atom does not occur in any rule head:
-  initialState(X,V)
-
-preprocess.lp:47:28-47: info: atom does not occur in any rule head:
-  precondition(A,X,V)
+Solving...
+strips-incremental-c1-start.lp:88:41-56: info: atom does not occur in any rule head:
+  contains(G,X,V)
 
 Solving...
 Answer: 1
-
+goal(variable("delivered_package9_l3_t12"),value(variable("delivered_package9_l3_t12"),true)) goal(variable("delivered_package8_l3_t12"),value(variable("delivered_package8_l3_t12"),true)) goal(variable("at-destination_package7_l1"),value(variable("at-destination_package7_l1"),true)) goal(variable("delivered_package6_l1_t8"),value(variable("delivered_package6_l1_t8"),true)) goal(variable("at-destination_package5_l1"),value(variable("at-destination_package5_l1"),true)) goal(variable("at-destination_package4_l1"),value(variable("at-destination_package4_l1"),true)) goal(variable("at-destination_package3_l1"),value(variable("at-destination_package3_l1"),true)) goal(variable("delivered_package2_l3_t4"),value(variable("delivered_package2_l3_t4"),true)) goal(variable("delivered_package1_l4_t4"),value(variable("delivered_package1_l4_t4"),true)) move(action("deliver_package7_l1_t12_t12"),1)
 SATISFIABLE
 
 Models       : 1+
-Calls        : 1
-Time         : 0.048s (Solving: 0.00s 1st Model: 0.00s Unsat: 0.00s)
-CPU Time     : 0.049s
-Threads      : 4        (Winner: 0)
+Calls        : 2
+Time         : 0.893s (Solving: 0.04s 1st Model: 0.00s Unsat: 0.00s)
+CPU Time     : 0.896s
+Threads      : 8        (Winner: 1)

@@ -5,7 +5,9 @@ import logging
 import signal
 import re
 
-a = ["depot1","depot3","depot10","depot2","depot"]
-
-a = sorted(a, key=lambda x: int(re.sub(r"[^0-9]", "", x)))
+i = 3
+a = []
+while len(a) <= i:
+		a.append(None)
+a[i] =2
 print(a)

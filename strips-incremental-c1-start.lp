@@ -155,7 +155,7 @@ num(0..limit).
 
 newact(X,t):-occurs(X,t), t>c1.
 %#minimize{1,A,t:newact(A,t);-(25-3*K),X,K:achnew(X,K)}.
-#minimize{-(24-3*K),X,K:achnew(X,K)}.
+#minimize{-(24 - 3*K),X,K:achnew(X,K)}.
 
 initialState(t,X,value(X,true)):-holds(X,value(X,true),t), t=c1.
 move(A,t) :- occurs(A,t), t<=c1.

@@ -93,9 +93,10 @@ cont = False;
 
 onlyHplasp = False;
 onlyClingo = False;
+singleDomain = None;
 
 try:
-	opts, args = getopt.getopt(sys.argv[1:],"ht:o:c",["continue","max-duration=","only="])
+	opts, args = getopt.getopt(sys.argv[1:],"ht:o:c:d:",["continue","max-duration=","only=","domain="])
 	for opt, arg in opts:
 		if opt == '-h':
 			print ('-c Ignore experiment if results exist. (--continue)\n -t <seconds> Force quit an epxeriment after t seconds. (--max-duration <seconds>)');
@@ -104,6 +105,8 @@ try:
 			t = int(arg)
 		elif opt in ("-c", "--continue"):
 			cont = True
+		elif opt in ("-d", "--domain"):
+			singleDomain = arg; 
 		elif opt in ("-o", "--only"):
 			if arg == "hplasp":
 				onlyHplasp = True;
@@ -126,6 +129,8 @@ for root, dirs, files in os.walk("all-domains"):
 	print("HPLASP using relaxed steps")
 	dirs.sort();
 	for dir in dirs:
+		if singleDomain is not None and singleDomain != dir:
+			continue;
 		print("Domain: "+dir)
 		for innerroot, innerdirs, innerfiles in os.walk("all-domains/"+dir):
 			innerfiles.sort()
@@ -153,6 +158,8 @@ for root, dirs, files in os.walk("all-domains"):
 	print("Clingo")
 	dirs.sort();
 	for dir in dirs:
+		if singleDomain is not None and singleDomain != dir:
+			continue;
 		print("Domain: "+dir)
 		for innerroot, innerdirs, innerfiles in os.walk("all-domains/"+dir):
 			innerfiles.sort()

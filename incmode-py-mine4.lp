@@ -230,6 +230,8 @@ def main(prg):
             printTimeDiff("solve")
         solution_number = solution_number + 1;                
         step = step+1
+    if cost == 0:
+        utils.setCost(cost)
     appendOut("*************************************************************************\n")
     appendOut("Cost: {}\n".format(cost))
     appendOut("-------------------------------------------------------------------------\n")

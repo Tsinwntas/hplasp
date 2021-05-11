@@ -7,7 +7,7 @@ import signal
 import re
 import op
 
-blacklist = ["tpp,p21.pddl","tpp,p28.pddl"]
+blacklist = ["zenotravel","sokoban","storage"]
 
 def updateFiles(dir,domain,problem):
 	os.system("cp all-domains/"+dir+"/"+domain+" domains/domain.pddl")
@@ -130,6 +130,9 @@ for root, dirs, files in os.walk("all-domains"):
 	dirs.sort();
 	for dir in dirs:
 		if singleDomain is not None and singleDomain != dir:
+			continue;
+		if dir in blacklist:
+			print("Domain "+dir+" blacklisted.")
 			continue;
 		print("Domain: "+dir)
 		for innerroot, innerdirs, innerfiles in os.walk("all-domains/"+dir):

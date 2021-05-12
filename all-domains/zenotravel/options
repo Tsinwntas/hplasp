@@ -1,7 +1,7 @@
 domain: domain.pddl
 problem: problem.pddl
 program: incrementalSteps.py
-steps: 2
+steps: 4
 incrementationRatio: 2
 parallel: 8
 maxSteps: 150

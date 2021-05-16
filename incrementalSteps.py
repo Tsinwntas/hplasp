@@ -143,8 +143,8 @@ def runStrictLoop():
 				flag = True
 				break
 			print("COST: "+ str(utils.getCost()))
-			if utils.getCost() == 0:
-				break;
+			# if utils.getCost() == 0:
+			# 	break;
 		if not flag:
 			if not isBackground:
 				utils.loaded(t2)

@@ -1,13 +1,13 @@
 domain: domain.pddl
 problem: problem.pddl
 program: incrementalSteps.py
-steps: 4
+steps: 8
 incrementationRatio: 2
 parallel: 8
 maxSteps: 150
 maxSolutions: 0
-solveLimit: 0
-timeLimit: 0
+solveLimit: 3000
+timeLimit: 200
 parser: normal
 heuristic: cost
 toughness: 1.01

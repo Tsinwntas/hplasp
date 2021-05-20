@@ -73,7 +73,6 @@ def runStrictBySteps(iteration,steps):
 		return True
 
 	if utils.getCost() == 0:
-		print("COST 0")
 		if utils.failed():
 			return True;
 	if currentRelaxedSteps > previousRelaxedSteps:
@@ -92,13 +91,11 @@ def runStrictByCost(iteration,steps):
 	p=subprocess.Popen(['clingo translate.lp incmode-py-mine4.lp  --opt-mode=opt,'+str(int(utils.getToughenedCost(previousCost)))+' -c k='+op.getOptionOrDefault("k:","0")+' -c _iteration='+str(iteration)+' -c _parallel=1 -c c1='+str(steps)+getMaxSolutions()+' -t '+op.getOption("parallel")+getSolveLimit()+getTimeLimit()+' 1> log 2>&1'], shell=True)
 	p.wait();
 	currentCost = utils.getCost();
-	print("COST IN LOOP "+str(currentCost))
 	if utils.getDone():
 		utils.updateMoves();
 		return True
 
 	if currentCost == 0:
-		print("COST 0")
 		if utils.failed():
 			return True;
 	if currentCost > utils.getToughenedCost(previousCost):
@@ -142,7 +139,6 @@ def runStrictLoop():
 			if runStrict(currIteration, steps):
 				flag = True
 				break
-			print("COST: "+ str(utils.getCost()))
 			# if utils.getCost() == 0:
 			# 	break;
 		if not flag:
@@ -151,7 +147,6 @@ def runStrictLoop():
 			print("Unable to solve within strict step limit.")
 			return
 
-		print("COST mes to while: "+ str(utils.getCost()))
 	
 	if not isBackground:
 		utils.loaded(t2)
